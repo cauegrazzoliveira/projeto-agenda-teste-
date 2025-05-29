@@ -1,0 +1,71 @@
+# Agenda Backend API
+
+Este é o backend para uma aplicação de agendamentos, permitindo o gerenciamento de usuários com diferentes perfis de acesso (usuário, atendente, admin) e o agendamento de compromissos.
+
+## Tecnologias Utilizadas
+
+* **Node.js:** Ambiente de execução JavaScript.
+* **Express.js:** Framework para construção de APIs em Node.js.
+* **Sequelize:** ORM (Object-Relational Mapper) para interagir com o banco de dados.
+* **MySQL:** Banco de dados relacional (as instruções de setup são para MySQL).
+* **JSON Web Tokens (JWT):** Para autenticação e autorização.
+* **bcrypt:** Para hashing de senhas.
+* **dotenv:** Para gerenciar variáveis de ambiente.
+* **Nodemon:** Para reiniciar o servidor automaticamente durante o desenvolvimento.
+* **Cors:** Para habilitar Cross-Origin Resource Sharing.
+
+## Pré-requisitos
+
+Antes de começar, garanta que você tem instalado em sua máquina:
+* [Node.js](https://nodejs.org/) (versão LTS recomendada, que já inclui o npm)
+* [Git](https://git-scm.com/)
+* Um servidor MySQL rodando localmente ou acessível.
+
+## Configuração do Ambiente de Desenvolvimento
+
+Siga os passos abaixo para configurar e rodar o projeto localmente:
+
+1.  **Clone o Repositório:**
+    ```bash
+    git clone <URL_DO_SEU_REPOSITORIO_NO_GITHUB>
+    cd agenda-backend
+    ```
+
+2.  **Instale as Dependências:**
+    Navegue até a pasta raiz do projeto (onde está o `package.json`) e execute:
+    ```bash
+    npm install
+    ```
+    Isso instalará todas as dependências listadas no `package.json`, incluindo o driver `mysql2`.
+
+3.  **Configure o Banco de Dados MySQL:**
+    * Certifique-se de que seu servidor MySQL está rodando.
+    * Crie um banco de dados para a aplicação (ex: `agenda_db_mysql`). Você pode usar uma ferramenta como MySQL Workbench, phpMyAdmin, ou a linha de comando do MySQL.
+        ```sql
+        CREATE DATABASE agenda_db_mysql CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+        ```
+    * Conecte-se a este banco de dados recém-criado e execute o script SQL fornecido no projeto para criar as tabelas:
+        * Arquivo do script: `db_script_mysql.sql`
+
+4.  **Configure as Variáveis de Ambiente:**
+    * Na raiz do projeto, crie um arquivo chamado `.env`.
+    * Copie o conteúdo do arquivo `.env.example` (se você criar um) ou adicione as seguintes variáveis, substituindo pelos seus valores:
+        ```env
+        DB_NAME=agenda_db_mysql
+        DB_USER=seu_usuario_mysql
+        DB_PASSWORD=sua_senha_mysql
+        DB_HOST=localhost
+        DB_PORT=3306
+
+        JWT_SECRET=coloque_aqui_um_segredo_longo_e_seguro_para_jwt
+
+        # PORT=3000 # Opcional, o servidor usará 3000 por padrão se não especificado
+        ```
+    * **Importante:** O arquivo `.env` contém informações sensíveis e **não deve** ser enviado para o repositório Git. Certifique-se de que `.env` está listado no seu arquivo `.gitignore`.
+
+## Rodando a Aplicação
+
+Após a configuração, para iniciar o servidor em modo de desenvolvimento (com Nodemon, que reinicia automaticamente ao detectar alterações nos arquivos), execute:
+
+```bash
+npm run dev
